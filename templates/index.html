@@ -18,7 +18,7 @@
   </head>
   <body>
     <div>
-      <table style="text-align: center">
+      <table>
         <th style="padding: 3rem">
           <h1>To-Do-List</h1>
           <div>TIME</div>
@@ -34,8 +34,7 @@
         </tr>
         <tr>
           <td>
-            <ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML">
-</ol>
+            <ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML"></ol>
           </td>
         </tr>
       </table>
@@ -57,3 +56,4 @@
 
   </body>
 </html>
+
