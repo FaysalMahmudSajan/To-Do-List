@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTMX + FastAPI Demo</title>
+  <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+  <h1>My To-Do-List</h1>
+
+  <form hx-post="/todos" hx-target="#items" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
+    <input type="text" name="name" placeholder="Enter items name">
+    <button type="submit">Add</button>
+  </form>
+
+<ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML">
+</ol>
+
+
+</body>
+</html>
