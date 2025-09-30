@@ -1,22 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>To-Do-List</title>
-  <script src="https://unpkg.com/htmx.org@2.0.0"></script>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-</head>
-<body>
-  <h1>My To-Do-List</h1>
-
-  <form hx-post="/todos" hx-target="#items" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
-    <input type="text" name="name" placeholder="Enter items name">
-    <button type="submit">Add</button>
-  </form>
-
-<ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML">
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.js"
+      integrity="sha384-yWakaGAFicqusuwOYEmoRjLNOC+6OFsdmwC2lbGQaRELtuVEqNzt11c2J711DeCZ"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <style>
+      td,th {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <table style="text-align: center">
+        <th style="padding: 3rem">
+          <h1>To-Do-List</h1>
+          <div>TIME</div>
+          <div id="timer"></div>
+        </th>
+        <tr>
+          <td>
+             <form hx-post="/todos" hx-target="#items" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
+              <input type="text" name="todo" placeholder="I want to ..." />
+              <button>Add</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML">
 </ol>
+          </td>
+        </tr>
+      </table>
+    </div>
 
+    <script>
+      const timerElement = document.getElementById("timer");
+      function updateTimer() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        timerElement.innerHTML = `${hours < 10 ? "0" + hours : hours}:${
+          minutes < 10 ? "0" + minutes : minutes
+        }:${seconds < 10 ? "0" + seconds : seconds}`;
+      } // Update the timer every 1000 milliseconds (1 second)
+      const timerInterval = setInterval(updateTimer, 1000);
+    </script>
 
-</body>
+  </body>
 </html>
