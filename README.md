@@ -1,8 +1,7 @@
 # To-Do-List
 
 This is a fastapi + htmx to-do-list <br>
-Project link :<a>`https://to-do-list-849i.onrender.com/`</a>
-
+Project link :<a href="https://to-do-list-849i.onrender.com/">LINK</a>
 # How to start
 
 1. `git clone https://github.com/Faysal3010/To-Do-List.git`
@@ -10,5 +9,6 @@ Project link :<a>`https://to-do-list-849i.onrender.com/`</a>
 3. in this file terminal: `py main.py`
 
 enjoy !!!
+
 
 
