@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>To-Do-List</title>
+    <title>To-Do-List</title>
     <script
       src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.js"
       integrity="sha384-yWakaGAFicqusuwOYEmoRjLNOC+6OFsdmwC2lbGQaRELtuVEqNzt11c2J711DeCZ"
@@ -26,7 +26,12 @@
         </th>
         <tr>
           <td>
-             <form hx-post="/todos" hx-target="#items" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
+            <form
+              hx-post="/todos"
+              hx-target="#todos"
+              hx-swap="innerHTML"
+              hx-on:htmx:after-request="this.reset()"
+            >
               <input type="text" name="todo" placeholder="I want to ..." />
               <button>Add</button>
             </form>
@@ -34,7 +39,12 @@
         </tr>
         <tr>
           <td>
-            <ol id="items" hx-get="/todos" hx-trigger="load" hx-swap="innerHTML"></ol>
+            <ol
+              id="todos"
+              hx-get="/todos"
+              hx-trigger="load"
+              hx-swap="innerHTML"
+            ></ol>
           </td>
         </tr>
       </table>
@@ -56,4 +66,3 @@
 
   </body>
 </html>
-
