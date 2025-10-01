@@ -1,4 +1,3 @@
-
 # FASTAPI Imports
 from fastapi import FastAPI, Request, Header, Form
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -9,10 +8,11 @@ from fastapi.encoders import jsonable_encoder
 from uuid import uuid4
 from typing import Annotated, Union
 
+# Initialize FastAPI
 app = FastAPI()
-templates = Jinja2Templates(directory='templates')
+# Configuring templates directory for Jinja2
+templates = Jinja2Templates(directory="templates")
 items = []
-
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -61,7 +61,6 @@ async def delete_todo(request: Request, todo_id: str):
     return templates.TemplateResponse(
         request=request, name="todos.html", context={"todos": items}
     )
-    
 # Todo Model
 
 
@@ -70,10 +69,3 @@ class TODO:
         self.id = uuid4()
         self.text = text
         self.done = False
-
-
-if __name__ == '__main__':
-    import uvicorn
-    uvicorn.run('main:app',host='0.0.0.0', reload=True)
-
-
