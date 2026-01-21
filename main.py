@@ -69,3 +69,22 @@ class TODO:
         self.id = uuid4()
         self.text = text
         self.done = False
+
+
+
+
+
+
+TARGET_URL = "https://smart-attendance-system-sfho.onrender.com/ping"
+
+async def self_hit_loop():
+    """Background random ping task."""
+    async with httpx.AsyncClient() as client:
+        while True:
+            waiting=random.randint(40, 49)
+            print(f"Waiting self hit : {waiting} second")
+            await asyncio.sleep(waiting)
+            try:
+                await client.get(TARGET_URL)
+            except Exception:
+                pass
