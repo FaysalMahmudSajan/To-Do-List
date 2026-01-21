@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
 
 
 # Initialize FastAPI
-app = FastAPI()
+app = FastAPI( lifespan=lifespan)
 # Configuring templates directory for Jinja2
 templates = Jinja2Templates(directory="templates")
 items = []
@@ -102,5 +102,6 @@ async def hit_loop():
                 await client.get(TARGET_URL)
             except Exception:
                 pass
+
 
 
