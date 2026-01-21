@@ -8,6 +8,17 @@ from fastapi.encoders import jsonable_encoder
 from uuid import uuid4
 from typing import Annotated, Union
 
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Create database tables
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    asyncio.create_task(hit_loop())
+    yield
+
+
 # Initialize FastAPI
 app = FastAPI()
 # Configuring templates directory for Jinja2
@@ -71,13 +82,15 @@ class TODO:
         self.done = False
 
 
-
-
+@app.get("/ping")
+async def ping():
+    print("Pong")
+    return {"message": "pong"}
 
 
 TARGET_URL = "https://smart-attendance-system-sfho.onrender.com/ping"
 
-async def self_hit_loop():
+async def hit_loop():
     """Background random ping task."""
     async with httpx.AsyncClient() as client:
         while True:
@@ -88,3 +101,4 @@ async def self_hit_loop():
                 await client.get(TARGET_URL)
             except Exception:
                 pass
+
