@@ -11,17 +11,17 @@ from typing import Annotated, Union
 
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Startup: Create database tables
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    asyncio.create_task(hit_loop())
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     # Startup: Create database tables
+#     async with engine.begin() as conn:
+#         await conn.run_sync(Base.metadata.create_all)
+#     asyncio.create_task(hit_loop())
+#     yield
 
 
 # Initialize FastAPI
-app = FastAPI( lifespan=lifespan)
+app = FastAPI()
 # Configuring templates directory for Jinja2
 templates = Jinja2Templates(directory="templates")
 items = []
@@ -89,19 +89,20 @@ async def ping():
     return {"message": "pong"}
 
 
-TARGET_URL = "https://smart-attendance-system-sfho.onrender.com/ping"
+# TARGET_URL = "https://smart-attendance-system-sfho.onrender.com/ping"
 
-async def hit_loop():
-    """Background random ping task."""
-    async with httpx.AsyncClient() as client:
-        while True:
-            waiting=random.randint(40, 49)
-            print(f"Waiting self hit : {waiting} second")
-            await asyncio.sleep(waiting)
-            try:
-                await client.get(TARGET_URL)
-            except Exception:
-                pass
+# async def hit_loop():
+#     """Background random ping task."""
+#     async with httpx.AsyncClient() as client:
+#         while True:
+#             waiting=random.randint(40, 49)
+#             print(f"Waiting self hit : {waiting} second")
+#             await asyncio.sleep(waiting)
+#             try:
+#                 await client.get(TARGET_URL)
+#             except Exception:
+#                 pass
+
 
 
 
